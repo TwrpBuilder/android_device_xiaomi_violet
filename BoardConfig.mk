@@ -78,6 +78,7 @@ BOARD_SUPPRESS_SECURE_ERASE := true
 
 # File systems
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 
 # Workaround for error copying vendor files to recovery ramdisk
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -104,14 +105,6 @@ TW_INCLUDE_FBE := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_MAX_BRIGHTNESS := 255
 TW_SCREEN_BLANK_ON_BOOT := true
-
-TW_CRYPTO_USE_SYSTEM_VOLD := \
-    qseecomd \
-    servicemanager \
-    hwservicemanager \
-    keymaster-3-0
-
-TW_CRYPTO_SYSTEM_VOLD_MOUNT := vendor
 
 # Security Patch Hack to prevent Anti Rollback
 PLATFORM_SECURITY_PATCH := 2025-12-31
