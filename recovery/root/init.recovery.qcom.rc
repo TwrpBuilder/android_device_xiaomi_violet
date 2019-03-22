@@ -34,10 +34,12 @@ on fs
     chown system system /dev/ion
     install_keyring
 
-on init
-    symlink /vendor/manifest.xml /system/manifest.xml
-    start hwservicemanager
-    setprop crypto.ready 1
+service prepdecrypt /sbin/init.prepdecrypt.sh
+    oneshot
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
 
 # Separate copy needed to use /sbin/linker64 instead of /system/bin/linker64
 service sbinqseecomd /sbin/qseecomd
@@ -66,7 +68,6 @@ service keystore_auth /sbin/keystore_auth
     disabled
     seclabel u:r:recovery:s0
 
-# keystore is started and stopped on demand by TWRP
 service keystore /sbin/keystore /tmp/misc/keystore
     user root
     group root drmrpc readproc
@@ -86,15 +87,20 @@ service keymaster-4-0 /sbin/android.hardware.keymaster@4.0-service-qti
     seclabel u:r:recovery:s0
 
 on boot
+    setprop sys.usb.config mtp,adb
     setprop sys.usb.config adb
 
-on property:crypto.ready=0
+on init
+    start hwservicemanager
+    start prepdecrypt
+
+on property:prep.decrypt=0
     stop sbinqseecomd
     stop keymaster-4-0
     stop gatekeeper-1-0
     stop servicemanager
 
-on property:crypto.ready=1
+on property:prep.decrypt=1
     start sbinqseecomd
 
 on property:vendor.sys.listeners.registered=true
