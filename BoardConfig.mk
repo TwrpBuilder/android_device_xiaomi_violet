@@ -80,7 +80,7 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 
 # Crypto
-TW_INCLUDE_CRYPTO := true
+# TW_INCLUDE_CRYPTO := true
 
 # TWRP specific build flags
 TW_THEME := portrait_hdpi
