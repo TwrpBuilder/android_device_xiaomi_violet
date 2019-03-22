@@ -35,7 +35,6 @@ on fs
     install_keyring
 
 on init
-    symlink /vendor/manifest.xml /system/manifest.xml
     start hwservicemanager
     setprop crypto.ready 1
 
@@ -97,7 +96,7 @@ on property:crypto.ready=0
 on property:crypto.ready=1
     start sbinqseecomd
 
-on property:vendor.sys.listeners.registered=true
+on property:sys.listeners.registered=true
     start keymaster-4-0
     start gatekeeper-1-0
     start servicemanager

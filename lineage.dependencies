@@ -1,0 +1,8 @@
+[
+	{
+		"remote":"github",
+		"repository":"TwrpBuilder/android_kernel_xiaomi_violet",
+		"target_path":"kernel/xiaomi/violet",
+		"revision":"violet-p-oss"
+	}
+]
